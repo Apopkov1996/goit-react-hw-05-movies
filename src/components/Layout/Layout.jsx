@@ -43,7 +43,7 @@ export const Element = styled(NavLink)`
   border-radius: 4px;
   margin-left: 10px;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 20px;
   color: black;
 
   &.active {
@@ -51,6 +51,6 @@ export const Element = styled(NavLink)`
     color: white;
   }
   &:hover:not(.active) {
-    background-color: lightblue;
+    background-color: #93b0ba;
   }
 `;
