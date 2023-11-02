@@ -1,10 +1,11 @@
 import ListFilms from 'components/ListFilms/ListFilms';
+import { Loader } from 'components/Loader/Loader';
 import { fetchTrendingMovies } from 'helpers/getMoviesData';
 import React, { useState, useEffect } from 'react';
 
 const Home = () => {
   const [films, setFilms] = useState([]);
-  const [, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getFilms();
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <div>
       <h1>Trending oday</h1>
-      <ListFilms films={films} />
+      {isLoading && !films.length ? <Loader /> : <ListFilms films={films} />}
     </div>
   );
 };

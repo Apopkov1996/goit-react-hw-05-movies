@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import { fetchActorsOfMovie } from 'helpers/getMoviesData';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -5,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const Cast = () => {
   const { movieId } = useParams();
   const [actors, setActors] = useState([]);
-  const [, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getActors(movieId);
@@ -26,27 +27,32 @@ const Cast = () => {
 
   return (
     <div>
-      <ul>
-        {actors.map(({ profile_path, name, character, id }) => (
-          <li key={id}>
-            {profile_path ? (
-              <img
-                width="70"
-                src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-                alt={name}
-              />
-            ) : (
-              <img
-                width="70"
-                src={`https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg`}
-                alt={name}
-              />
-            )}
-            <p>{name}</p>
-            <p>Character: {character}</p>
-          </li>
-        ))}
-      </ul>
+      {isLoading && !actors.length && <Loader />}
+      {actors.length ? (
+        <ul>
+          {actors.map(({ profile_path, name, character, id }) => (
+            <li key={id}>
+              {profile_path ? (
+                <img
+                  width="70"
+                  src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
+                  alt={name}
+                />
+              ) : (
+                <img
+                  width="70"
+                  src={`https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg`}
+                  alt={name}
+                />
+              )}
+              <p>{name}</p>
+              <p>Character: {character}</p>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      {!actors.length && !isLoading && `We do not have Casts for this films`}
     </div>
   );
 };

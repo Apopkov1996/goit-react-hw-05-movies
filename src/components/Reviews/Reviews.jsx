@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import { fetchReviewsOfMovie } from 'helpers/getMoviesData';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -5,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
-  const [, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getReviews(movieId);
@@ -17,11 +18,15 @@ const Reviews = () => {
       const data = await fetchReviewsOfMovie(reviews);
       const { results } = data;
       setReviews(prevState => [...prevState, ...results]);
-    } catch (error) {}
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div>
+      {isLoading && !reviews.length && <Loader />}
       {reviews.length ? (
         <ul>
           {reviews.map(({ author, content, id }) => (
@@ -32,9 +37,9 @@ const Reviews = () => {
             </li>
           ))}
         </ul>
-      ) : (
-        `We do not have Reviws for this films`
-      )}
+      ) : null}
+
+      {!reviews.length && !isLoading && `We do not have Reviws for this films`}
     </div>
   );
 };
