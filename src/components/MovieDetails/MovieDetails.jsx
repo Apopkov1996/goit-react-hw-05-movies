@@ -1,6 +1,6 @@
 import { Loader } from 'components/Loader/Loader';
 import { fetchFullInformationMovie } from 'helpers/getMoviesData';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -113,7 +113,9 @@ const MovieDetails = () => {
               </li>
             </ListAditional>
             <hr />
-            <Outlet />
+            <Suspense>
+              <Outlet />
+            </Suspense>
           </div>
         </>
       )}
