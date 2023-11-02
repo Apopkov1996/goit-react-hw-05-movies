@@ -1,5 +1,5 @@
-import Home from '../pages/Home';
-import Movies from '../pages/Movies';
+// import Home from '../pages/Home';
+// import Movies from '../pages/Movies';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './Layout/Layout';
 // import MovieDetails from './MovieDetails/MovieDetails';
@@ -10,6 +10,8 @@ import { lazy } from 'react';
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
+const Home = lazy(() => import('../pages/Home'));
+const Movies = lazy(() => import('../pages/Movies'));
 
 export const App = () => {
   return (
