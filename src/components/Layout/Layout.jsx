@@ -13,7 +13,7 @@ const Layout = () => {
         </ul>
       </Header>
 
-      <Suspense fallback={<Loader />}>
+      <Suspense >
         <Outlet />
       </Suspense>
     </Wrapper>

@@ -113,7 +113,7 @@ const MovieDetails = () => {
               </li>
             </ListAditional>
             <hr />
-            <Suspense fallback={<Loader />}>
+            <Suspense>
               <Outlet />
             </Suspense>
           </div>
